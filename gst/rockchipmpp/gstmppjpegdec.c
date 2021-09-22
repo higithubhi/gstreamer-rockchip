@@ -309,6 +309,8 @@ gst_mpp_jpeg_dec_send_mpp_packet (GstVideoDecoder * decoder,
   mpp_frame_init (&mframe);
   mpp_frame_set_buffer (mframe, mbuf);
   mpp_buffer_put (mbuf);
+  mpp_frame_set_ver_stride(mframe,GST_ROUND_UP_16 (mpp_frame_get_width (mframe)));
+  mpp_frame_set_hor_stride(mframe,GST_ROUND_UP_16 (mpp_frame_get_height (mframe)));
 
   meta = mpp_frame_get_meta (mframe);
   mpp_meta_set_packet (meta, KEY_INPUT_PACKET, mpkt);
